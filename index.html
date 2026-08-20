@@ -226,6 +226,21 @@ tr.tot td{font-weight:700;border-top:2px solid var(--baseline)}
 .btnrow{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
 select.cls{padding:3px 6px;font-size:12px;border:1px solid var(--baseline);border-radius:6px;background:var(--input-bg);color:var(--text-primary);font-family:inherit}
 
+/* toggle switch */
+.switch{display:flex;align-items:center;gap:12px;cursor:pointer;padding:6px 0;user-select:none}
+.switch input{position:absolute;opacity:0;width:0;height:0}
+.switch .track{width:42px;height:24px;border-radius:999px;background:var(--baseline);flex:none;
+  position:relative;transition:background .18s}
+.switch .knob{position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .18s}
+.switch input:checked+.track{background:var(--status-good)}
+.switch input:checked+.track .knob{transform:translateX(18px)}
+.switch input:focus-visible+.track{outline:2px solid var(--accent);outline-offset:2px}
+.switch-txt b{font-size:13.5px;display:block}
+.switch-txt small{font-size:11.5px;color:var(--text-muted)}
+.switch-txt small.ok{color:var(--success-text)}
+.switch-txt small.bad{color:var(--status-serious)}
+
 .notes{font-size:12.5px;color:var(--text-secondary)}
 .notes li{margin-bottom:7px;margin-left:18px}
 .disclaimer{border-left:3px solid var(--status-warning);padding:10px 14px;background:color-mix(in srgb,var(--status-warning) 8%,var(--surface-1));border-radius:0 8px 8px 0;font-size:12.5px;margin-top:14px}
@@ -260,7 +275,6 @@ footer{text-align:center;padding:30px 0 0;color:var(--text-muted);font-size:12px
   <div class="hero">
     <h1>คำนวณและวางแผนภาษีเงินได้บุคคลธรรมดา</h1>
     <p>กรอกรายได้และค่าลดหย่อน ระบบจะคำนวณภาษีตามอัตราก้าวหน้าให้ทันที พร้อมวิเคราะห์ว่า<strong>ควรซื้อกองทุน/ประกันเพิ่มเท่าไรจึงจะคุ้ม</strong> และเตือนเมื่อการไล่ลดขั้นบันไดไม่คุ้มค่า &mdash; คำนวณทั้งหมดในเครื่องของคุณ ไม่มีการส่งข้อมูลออกไปที่ใด</p>
-    <div class="callout" style="margin-top:14px;max-width:none"><b>ตัวเลขที่เห็นอยู่เป็นค่าตัวอย่าง</b> โปรดแทนที่ด้วยข้อมูลของคุณเอง &mdash; หน้านี้ไม่เก็บข้อมูลไว้ที่ใดเลย ปิดแท็บแล้วข้อมูลหายทันที หากต้องการใช้ซ้ำ ให้กด &ldquo;บันทึกข้อมูล (.json)&rdquo; ท้ายหน้าเก็บเป็นไฟล์ไว้ในเครื่อง แล้วกด &ldquo;โหลดข้อมูล&rdquo; เมื่อกลับมาใช้ใหม่</div>
   </div>
 
   <div class="grid">
@@ -286,7 +300,7 @@ footer{text-align:center;padding:30px 0 0;color:var(--text-muted);font-size:12px
           </div>
           <div>
             <label for="kw">คำค้นชื่อบริษัท (คั่นด้วย ,)</label>
-            <input type="text" id="kw" value="" placeholder="เช่น ชื่อบริษัทที่ปรากฏในสเตทเมนต์" autocomplete="off">
+            <input type="text" id="kw" value="WORLDWIDE,เวิลด์วาย" autocomplete="off">
           </div>
         </div>
 
@@ -315,14 +329,14 @@ footer{text-align:center;padding:30px 0 0;color:var(--text-muted);font-size:12px
         <p class="sub">เงินได้พึงประเมินทั้งปี ก่อนหักค่าใช้จ่ายและค่าลดหย่อน</p>
 
         <div class="grp">เงินได้จากการจ้างงาน &mdash; มาตรา 40(1)</div>
-        <div class="field"><label for="i_salary">เงินเดือน (บาท/เดือน)</label><input type="number" id="i_salary" value="30000" min="0" step="500"></div>
+        <div class="field"><label for="i_salary">เงินเดือน (บาท/เดือน)</label><input type="number" id="i_salary" value="42000" min="0" step="500"></div>
         <div class="field"><label for="i_months">จำนวนเดือนที่ได้รับ</label><input type="number" id="i_months" value="12" min="0" max="12" step="1"></div>
-        <div class="field"><label for="i_comm">ค่าคอมมิชชั่น / อินเซนทีฟ ทั้งปี<small>ยอดที่ได้รับจริง + ที่คาดว่าจะได้เพิ่ม</small></label><input type="number" id="i_comm" value="0" min="0" step="1000"></div>
+        <div class="field"><label for="i_comm">ค่าคอมมิชชั่น / อินเซนทีฟ ทั้งปี<small>ยอดที่ได้รับจริง + ที่คาดว่าจะได้เพิ่ม</small></label><input type="number" id="i_comm" value="127469.76" min="0" step="1000"></div>
         <div class="field"><label for="i_bonus">โบนัส และเงินได้ 40(1) อื่น ๆ</label><input type="number" id="i_bonus" value="0" min="0" step="1000"></div>
 
         <div class="grp">ค่าเช่าอสังหาริมทรัพย์ &mdash; มาตรา 40(5)</div>
-        <div class="field"><label for="i_rent">ค่าเช่า (บาท/เดือน)</label><input type="number" id="i_rent" value="0" min="0" step="500"></div>
-        <div class="field"><label for="i_rentm">จำนวนเดือนที่ปล่อยเช่าในปีนี้<small>เช่น เริ่มปล่อยเช่าเดือน ก.ย. = 4 เดือน</small></label><input type="number" id="i_rentm" value="0" min="0" max="12" step="1"></div>
+        <div class="field"><label for="i_rent">ค่าเช่า (บาท/เดือน)</label><input type="number" id="i_rent" value="11500" min="0" step="500"></div>
+        <div class="field"><label for="i_rentm">จำนวนเดือนที่ปล่อยเช่าในปีนี้<small>เริ่ม ก.ย. 2569 = 4 เดือน</small></label><input type="number" id="i_rentm" value="4" min="0" max="12" step="1"></div>
         <div class="field"><label for="i_rentexp">วิธีหักค่าใช้จ่ายค่าเช่า</label>
           <select id="i_rentexp"><option value="0.3">เหมา 30%</option><option value="actual">ตามจริง</option></select></div>
         <div class="field" id="rentActualWrap" hidden><label for="i_rentactual">ค่าใช้จ่ายตามจริง (บาท/ปี)</label><input type="number" id="i_rentactual" value="0" min="0" step="1000"></div>
@@ -336,7 +350,7 @@ footer{text-align:center;padding:30px 0 0;color:var(--text-muted);font-size:12px
         <div class="field"><label>ผู้มีเงินได้ (คงที่)</label><input type="number" value="60000" disabled></div>
         <div class="field"><label for="a_spouse">คู่สมรสไม่มีเงินได้<small>60,000 บาท</small></label>
           <select id="a_spouse"><option value="0">ไม่มี</option><option value="60000">มี</option></select></div>
-        <div class="field"><label for="a_parents">บิดามารดา (จำนวนคน)<small>คนละ 30,000 &middot; อายุ 60+ รายได้ไม่เกิน 30,000/ปี</small></label><input type="number" id="a_parents" value="0" min="0" max="4" step="1"></div>
+        <div class="field"><label for="a_parents">บิดามารดา (จำนวนคน)<small>คนละ 30,000 &middot; อายุ 60+ รายได้ไม่เกิน 30,000/ปี</small></label><input type="number" id="a_parents" value="2" min="0" max="4" step="1"></div>
         <div class="field"><label for="a_child1">บุตร คนที่ 1 หรือเกิดก่อนปี 2561</label><input type="number" id="a_child1" value="0" min="0" step="1"></div>
         <div class="field"><label for="a_child2">บุตรคนที่ 2 ขึ้นไป ที่เกิดปี 2561+<small>คนละ 60,000 บาท</small></label><input type="number" id="a_child2" value="0" min="0" step="1"></div>
         <div class="field"><label for="a_disabled">อุปการะคนพิการ/ทุพพลภาพ (คน)<small>คนละ 60,000 บาท</small></label><input type="number" id="a_disabled" value="0" min="0" step="1"></div>
@@ -347,14 +361,14 @@ footer{text-align:center;padding:30px 0 0;color:var(--text-muted);font-size:12px
       <div class="card">
         <h2><span class="num">4</span> ประกันและดอกเบี้ยที่อยู่อาศัย</h2>
         <p class="sub">กรอกเบี้ยที่จ่ายจริง ระบบจะตัดเพดานให้</p>
-        <div class="field"><label for="p_sso">ประกันสังคม (จ่ายจริงทั้งปี)<small>ลดหย่อนได้สูงสุด 9,000 บาท</small></label><input type="number" id="p_sso" value="0" min="0" step="100"></div>
+        <div class="field"><label for="p_sso">ประกันสังคม (จ่ายจริงทั้งปี)<small>ลดหย่อนได้สูงสุด 9,000 บาท</small></label><input type="number" id="p_sso" value="10500" min="0" step="100"></div>
         <div class="capnote" id="cap_sso"></div>
-        <div class="field"><label for="p_health">เบี้ยประกันสุขภาพตนเอง<small>สูงสุด 25,000 บาท</small></label><input type="number" id="p_health" value="0" min="0" step="1000"></div>
+        <div class="field"><label for="p_health">เบี้ยประกันสุขภาพตนเอง<small>สูงสุด 25,000 บาท</small></label><input type="number" id="p_health" value="35791" min="0" step="1000"></div>
         <div class="capnote" id="cap_health"></div>
-        <div class="field"><label for="p_life">เบี้ยประกันชีวิต<small>ชีวิต + สุขภาพ รวมกันไม่เกิน 100,000 บาท</small></label><input type="number" id="p_life" value="0" min="0" step="1000"></div>
+        <div class="field"><label for="p_life">เบี้ยประกันชีวิต<small>ชีวิต + สุขภาพ รวมกันไม่เกิน 100,000 บาท</small></label><input type="number" id="p_life" value="24340" min="0" step="1000"></div>
         <div class="capnote" id="cap_life"></div>
         <div class="field"><label for="p_phealth">ประกันสุขภาพบิดามารดา<small>สูงสุด 15,000 บาท</small></label><input type="number" id="p_phealth" value="0" min="0" step="1000"></div>
-        <div class="field"><label for="p_mortgage">ดอกเบี้ยเงินกู้ที่อยู่อาศัย<small>สูงสุด 100,000 บาท</small></label><input type="number" id="p_mortgage" value="0" min="0" step="1000"></div>
+        <div class="field"><label for="p_mortgage">ดอกเบี้ยเงินกู้ที่อยู่อาศัย<small>สูงสุด 100,000 บาท</small></label><input type="number" id="p_mortgage" value="100000" min="0" step="1000"></div>
         <div class="capnote" id="cap_mortgage"></div>
       </div>
 
@@ -399,13 +413,36 @@ footer{text-align:center;padding:30px 0 0;color:var(--text-muted);font-size:12px
       <div class="card">
         <h2><span class="num">7</span> ข้อมูลสำหรับคำแนะนำ</h2>
         <p class="sub">ใช้ประเมินว่า &ldquo;ควรซื้อเท่าไร&rdquo; โดยไม่เกินกำลังของคุณ</p>
-        <div class="field"><label for="r_spare">เงินเย็นที่ลงทุนได้ต่อปี<small>เงินที่ไม่ต้องใช้อีกอย่างน้อย 5 ปี</small></label><input type="number" id="r_spare" value="0" min="0" step="5000"></div>
+        <div class="field"><label for="r_spare">เงินเย็นที่ลงทุนได้ต่อปี<small>เงินที่ไม่ต้องใช้อีกอย่างน้อย 5 ปี</small></label><input type="number" id="r_spare" value="50000" min="0" step="5000"></div>
         <div class="field"><label for="r_safe">ผลตอบแทนทางเลือกที่ปลอดภัย (%/ปี)<small>เช่น ดอกเบี้ยเงินฝากประจำ</small></label><input type="number" id="r_safe" value="2.5" min="0" step="0.25"></div>
         <div class="btnrow">
           <button class="btn ghost" id="exportBtn">บันทึกข้อมูล (.json)</button>
           <button class="btn ghost" id="importBtn">โหลดข้อมูล</button>
           <button class="btn ghost" id="printBtn">พิมพ์ / บันทึก PDF</button>
           <input type="file" id="importFile" accept=".json,application/json" hidden>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2><span class="num">💾</span> การบันทึกข้อมูล</h2>
+        <p class="sub">จำตัวเลขที่กรอกไว้ในเบราว์เซอร์นี้ เพื่อไม่ต้องกรอกใหม่ทุกครั้ง</p>
+
+        <label class="switch" for="autosave">
+          <input type="checkbox" id="autosave" checked>
+          <span class="track"><span class="knob"></span></span>
+          <span class="switch-txt">
+            <b>บันทึกอัตโนมัติ</b>
+            <small id="saveStatus">กำลังตรวจสอบ…</small>
+          </span>
+        </label>
+
+        <div class="btnrow">
+          <button class="btn ghost" id="clearSaved">ลบข้อมูลที่บันทึกไว้</button>
+        </div>
+
+        <div class="callout" style="margin-top:14px;margin-bottom:0">
+          ข้อมูลถูกเก็บไว้ใน <b>เบราว์เซอร์เครื่องนี้เท่านั้น</b> (localStorage) ไม่ได้ส่งขึ้นเซิร์ฟเวอร์ และคนอื่นที่เปิดเว็บเดียวกันจากเครื่องอื่นจะไม่เห็นข้อมูลของคุณ<br><br>
+          <b>⚠️ ถ้าใช้คอมพิวเตอร์สาธารณะหรือเครื่องที่ใช้ร่วมกับคนอื่น</b> ให้ปิดสวิตช์นี้ หรือกด &ldquo;ลบข้อมูลที่บันทึกไว้&rdquo; ก่อนลุกจากเครื่อง &mdash; ไม่อย่างนั้นคนถัดไปที่เปิดหน้านี้จะเห็นตัวเลขของคุณ
         </div>
       </div>
     </div>
@@ -507,6 +544,7 @@ footer{text-align:center;padding:30px 0 0;color:var(--text-muted);font-size:12px
       <li><strong>ค่าลดหย่อนบิดามารดา</strong> คนละ 30,000 บาท เงื่อนไข: อายุ 60 ปีขึ้นไป มีเงินได้พึงประเมินไม่เกิน 30,000 บาท/ปี และไม่ถูกบุตรคนอื่นใช้สิทธิซ้ำ</li>
       <li><strong>เงินบริจาค</strong> รวมทั้งหมดต้องไม่เกิน 10% ของเงินได้หลังหักค่าใช้จ่ายและค่าลดหย่อนอื่นแล้ว</li>
       <li><strong>สถานะมาตรการ Easy E-Receipt / ช้อปดีมีคืน ปี 2569</strong> ยังไม่มีความชัดเจน โปรดตรวจสอบประกาศของกรมสรรพากรก่อนใช้สิทธิ</li>
+      <li><strong>การบันทึกข้อมูล</strong> เมื่อเปิดสวิตช์ &ldquo;บันทึกอัตโนมัติ&rdquo; ตัวเลขที่กรอกจะถูกเก็บไว้ใน localStorage ของเบราว์เซอร์เครื่องนี้เท่านั้น ไม่ถูกส่งขึ้นเซิร์ฟเวอร์ใด ๆ <strong>รหัสผ่านไฟล์ PDF และรายการเดินบัญชีที่อ่านได้จะไม่ถูกบันทึก</strong> ไม่ว่ากรณีใด หากใช้เครื่องสาธารณะให้ปิดสวิตช์หรือกดลบข้อมูลก่อนลุกจากเครื่อง</li>
     </ul>
     <div class="disclaimer">
       <strong>⚠️ ข้อจำกัดความรับผิด</strong> &mdash; เครื่องมือนี้เป็นการประมาณการเพื่อการวางแผนเบื้องต้นเท่านั้น ไม่ใช่คำแนะนำทางภาษี กฎหมาย หรือการลงทุน ผู้จัดทำไม่ใช่ผู้สอบบัญชีหรือที่ปรึกษาการลงทุน หลักเกณฑ์ภาษีอาจเปลี่ยนแปลงได้ และแต่ละคนมีเงื่อนไขเฉพาะตัว โปรดตรวจสอบกับกรมสรรพากรหรือผู้เชี่ยวชาญด้านภาษีก่อนตัดสินใจลงทุนหรือยื่นแบบจริง การลงทุนในกองทุนรวมมีความเสี่ยง ผู้ลงทุนควรศึกษาข้อมูลก่อนตัดสินใจ
@@ -514,7 +552,7 @@ footer{text-align:center;padding:30px 0 0;color:var(--text-muted);font-size:12px
   </div>
 
   <footer>
-    สร้างด้วย HTML ไฟล์เดียว &middot; ไม่มีการเก็บหรือส่งข้อมูลออกนอกเครื่อง &middot; ปีภาษี 2569 (2026)
+    สร้างด้วย HTML ไฟล์เดียว &middot; ข้อมูลถูกเก็บไว้ในเบราว์เซอร์ของคุณเท่านั้น ไม่ส่งออกนอกเครื่อง &middot; ปีภาษี 2569 (2026)
   </footer>
 </div>
 
@@ -1092,10 +1130,83 @@ $('themeBtn').addEventListener('click',()=>{
   render();
 });
 
+/* ================= saving ================= */
+/* State lives in this browser only (localStorage). Every access is wrapped:
+   private-browsing modes and blocked-storage settings throw on read/write,
+   and the page must keep working as a plain calculator when that happens. */
+const LS_DATA='tax2569:data', LS_PREF='tax2569:autosave';
+const lsGet=k=>{try{return localStorage.getItem(k);}catch(e){return null;}};
+const lsSet=(k,v)=>{try{localStorage.setItem(k,v);return true;}catch(e){return false;}};
+const lsDel=k=>{try{localStorage.removeItem(k);}catch(e){}};
+
+const FIELDS=()=>document.querySelectorAll('input[type=number],select:not(.cls),#kw');
+function collectState(){const d={};FIELDS().forEach(el=>{if(el.id&&el.id!=='autosave')d[el.id]=el.value;});return d;}
+function applyState(d){if(!d)return;Object.entries(d).forEach(([k,v])=>{const el=$(k);if(el&&el.id!=='autosave')el.value=v;});}
+
+/* page defaults, captured before anything is restored, so "clear" can undo a restore */
+const DEFAULTS=collectState();
+
+let storageOK=true, saveTimer=null;
+function setStatus(txt,cls){
+  const el=$('saveStatus');if(!el)return;
+  el.textContent=txt;el.className=cls||'';
+}
+function doSave(){
+  if(!$('autosave').checked)return;
+  const ok=lsSet(LS_DATA,JSON.stringify(collectState()));
+  storageOK=ok;
+  if(ok){
+    const t=new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'});
+    setStatus('บันทึกไว้แล้วเมื่อ '+t,'ok');
+  }else{
+    setStatus('เบราว์เซอร์ไม่อนุญาตให้บันทึก (โหมดส่วนตัว?) — ใช้ปุ่มบันทึกเป็นไฟล์ .json แทนได้','bad');
+  }
+}
+function scheduleSave(){
+  if(!$('autosave').checked)return;
+  clearTimeout(saveTimer);saveTimer=setTimeout(doSave,400);
+}
+
+/* restore on load */
+(function restore(){
+  const pref=lsGet(LS_PREF);
+  const on=pref===null?true:pref==='1';
+  $('autosave').checked=on;
+  if(lsGet('__probe__')===null&&!lsSet('__probe__','1')){
+    storageOK=false;
+    setStatus('เบราว์เซอร์นี้ไม่อนุญาตให้บันทึกข้อมูล — ใช้ปุ่มบันทึกเป็นไฟล์ .json แทนได้','bad');
+    return;
+  }
+  lsDel('__probe__');
+  if(!on){setStatus('ปิดอยู่ — ข้อมูลจะหายเมื่อปิดแท็บ');return;}
+  const raw=lsGet(LS_DATA);
+  if(raw){
+    try{applyState(JSON.parse(raw));setStatus('กู้ข้อมูลที่บันทึกไว้ครั้งก่อนแล้ว','ok');}
+    catch(e){lsDel(LS_DATA);setStatus('เปิดอยู่ — ข้อมูลจะถูกบันทึกอัตโนมัติ');}
+  }else{
+    setStatus('เปิดอยู่ — ข้อมูลจะถูกบันทึกอัตโนมัติ');
+  }
+})();
+
+$('autosave').addEventListener('change',e=>{
+  const on=e.target.checked;
+  lsSet(LS_PREF,on?'1':'0');
+  if(on){doSave();}
+  else{lsDel(LS_DATA);setStatus('ปิดแล้ว — ลบข้อมูลที่บันทึกไว้ และจะไม่บันทึกอีก');}
+});
+
+$('clearSaved').addEventListener('click',()=>{
+  lsDel(LS_DATA);
+  applyState(DEFAULTS);
+  parsed=[];renderTx();$('log').innerHTML='';
+  render();
+  setStatus($('autosave').checked
+    ?'ลบข้อมูลแล้ว และคืนค่าเริ่มต้น — การกรอกครั้งต่อไปจะถูกบันทึกใหม่'
+    :'ลบข้อมูลแล้ว และคืนค่าเริ่มต้น');
+});
+
 $('exportBtn').addEventListener('click',()=>{
-  const data={};
-  document.querySelectorAll('input[type=number],select,#kw').forEach(el=>{if(el.id)data[el.id]=el.value;});
-  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const blob=new Blob([JSON.stringify(collectState(),null,2)],{type:'application/json'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);a.download='tax-plan-2569.json';a.click();
   URL.revokeObjectURL(a.href);
@@ -1104,15 +1215,21 @@ $('importBtn').addEventListener('click',()=>$('importFile').click());
 $('importFile').addEventListener('change',async e=>{
   const f=e.target.files[0];if(!f)return;
   try{
-    const d=JSON.parse(await f.text());
-    Object.entries(d).forEach(([k,v])=>{const el=$(k);if(el)el.value=v;});
-    render();
+    applyState(JSON.parse(await f.text()));
+    render();scheduleSave();
   }catch(err){alert('ไฟล์ไม่ถูกต้อง');}
+  e.target.value='';
 });
 $('printBtn').addEventListener('click',()=>window.print());
 
-document.addEventListener('input',e=>{if(e.target.matches('input,select'))render();});
-document.addEventListener('change',e=>{if(e.target.matches('select'))render();});
+document.addEventListener('input',e=>{
+  if(e.target.matches('input,select')&&e.target.id!=='autosave'&&e.target.id!=='pdfpass'){render();scheduleSave();}
+});
+document.addEventListener('change',e=>{
+  if(e.target.matches('select')&&!e.target.classList.contains('cls')){render();scheduleSave();}
+});
+/* last chance to flush a pending debounce */
+addEventListener('beforeunload',()=>{if(saveTimer){clearTimeout(saveTimer);doSave();}});
 
 render();
 </script>
