@@ -260,6 +260,7 @@ footer{text-align:center;padding:30px 0 0;color:var(--text-muted);font-size:12px
   <div class="hero">
     <h1>คำนวณและวางแผนภาษีเงินได้บุคคลธรรมดา</h1>
     <p>กรอกรายได้และค่าลดหย่อน ระบบจะคำนวณภาษีตามอัตราก้าวหน้าให้ทันที พร้อมวิเคราะห์ว่า<strong>ควรซื้อกองทุน/ประกันเพิ่มเท่าไรจึงจะคุ้ม</strong> และเตือนเมื่อการไล่ลดขั้นบันไดไม่คุ้มค่า &mdash; คำนวณทั้งหมดในเครื่องของคุณ ไม่มีการส่งข้อมูลออกไปที่ใด</p>
+    <div class="callout" style="margin-top:14px;max-width:none"><b>ตัวเลขที่เห็นอยู่เป็นค่าตัวอย่าง</b> โปรดแทนที่ด้วยข้อมูลของคุณเอง &mdash; หน้านี้ไม่เก็บข้อมูลไว้ที่ใดเลย ปิดแท็บแล้วข้อมูลหายทันที หากต้องการใช้ซ้ำ ให้กด &ldquo;บันทึกข้อมูล (.json)&rdquo; ท้ายหน้าเก็บเป็นไฟล์ไว้ในเครื่อง แล้วกด &ldquo;โหลดข้อมูล&rdquo; เมื่อกลับมาใช้ใหม่</div>
   </div>
 
   <div class="grid">
@@ -285,7 +286,7 @@ footer{text-align:center;padding:30px 0 0;color:var(--text-muted);font-size:12px
           </div>
           <div>
             <label for="kw">คำค้นชื่อบริษัท (คั่นด้วย ,)</label>
-            <input type="text" id="kw" value="WORLDWIDE,เวิลด์วาย" autocomplete="off">
+            <input type="text" id="kw" value="" placeholder="เช่น ชื่อบริษัทที่ปรากฏในสเตทเมนต์" autocomplete="off">
           </div>
         </div>
 
@@ -314,14 +315,14 @@ footer{text-align:center;padding:30px 0 0;color:var(--text-muted);font-size:12px
         <p class="sub">เงินได้พึงประเมินทั้งปี ก่อนหักค่าใช้จ่ายและค่าลดหย่อน</p>
 
         <div class="grp">เงินได้จากการจ้างงาน &mdash; มาตรา 40(1)</div>
-        <div class="field"><label for="i_salary">เงินเดือน (บาท/เดือน)</label><input type="number" id="i_salary" value="42000" min="0" step="500"></div>
+        <div class="field"><label for="i_salary">เงินเดือน (บาท/เดือน)</label><input type="number" id="i_salary" value="30000" min="0" step="500"></div>
         <div class="field"><label for="i_months">จำนวนเดือนที่ได้รับ</label><input type="number" id="i_months" value="12" min="0" max="12" step="1"></div>
-        <div class="field"><label for="i_comm">ค่าคอมมิชชั่น / อินเซนทีฟ ทั้งปี<small>ยอดที่ได้รับจริง + ที่คาดว่าจะได้เพิ่ม</small></label><input type="number" id="i_comm" value="127469.76" min="0" step="1000"></div>
+        <div class="field"><label for="i_comm">ค่าคอมมิชชั่น / อินเซนทีฟ ทั้งปี<small>ยอดที่ได้รับจริง + ที่คาดว่าจะได้เพิ่ม</small></label><input type="number" id="i_comm" value="0" min="0" step="1000"></div>
         <div class="field"><label for="i_bonus">โบนัส และเงินได้ 40(1) อื่น ๆ</label><input type="number" id="i_bonus" value="0" min="0" step="1000"></div>
 
         <div class="grp">ค่าเช่าอสังหาริมทรัพย์ &mdash; มาตรา 40(5)</div>
-        <div class="field"><label for="i_rent">ค่าเช่า (บาท/เดือน)</label><input type="number" id="i_rent" value="11500" min="0" step="500"></div>
-        <div class="field"><label for="i_rentm">จำนวนเดือนที่ปล่อยเช่าในปีนี้<small>เริ่ม ก.ย. 2569 = 4 เดือน</small></label><input type="number" id="i_rentm" value="4" min="0" max="12" step="1"></div>
+        <div class="field"><label for="i_rent">ค่าเช่า (บาท/เดือน)</label><input type="number" id="i_rent" value="0" min="0" step="500"></div>
+        <div class="field"><label for="i_rentm">จำนวนเดือนที่ปล่อยเช่าในปีนี้<small>เช่น เริ่มปล่อยเช่าเดือน ก.ย. = 4 เดือน</small></label><input type="number" id="i_rentm" value="0" min="0" max="12" step="1"></div>
         <div class="field"><label for="i_rentexp">วิธีหักค่าใช้จ่ายค่าเช่า</label>
           <select id="i_rentexp"><option value="0.3">เหมา 30%</option><option value="actual">ตามจริง</option></select></div>
         <div class="field" id="rentActualWrap" hidden><label for="i_rentactual">ค่าใช้จ่ายตามจริง (บาท/ปี)</label><input type="number" id="i_rentactual" value="0" min="0" step="1000"></div>
@@ -335,7 +336,7 @@ footer{text-align:center;padding:30px 0 0;color:var(--text-muted);font-size:12px
         <div class="field"><label>ผู้มีเงินได้ (คงที่)</label><input type="number" value="60000" disabled></div>
         <div class="field"><label for="a_spouse">คู่สมรสไม่มีเงินได้<small>60,000 บาท</small></label>
           <select id="a_spouse"><option value="0">ไม่มี</option><option value="60000">มี</option></select></div>
-        <div class="field"><label for="a_parents">บิดามารดา (จำนวนคน)<small>คนละ 30,000 &middot; อายุ 60+ รายได้ไม่เกิน 30,000/ปี</small></label><input type="number" id="a_parents" value="2" min="0" max="4" step="1"></div>
+        <div class="field"><label for="a_parents">บิดามารดา (จำนวนคน)<small>คนละ 30,000 &middot; อายุ 60+ รายได้ไม่เกิน 30,000/ปี</small></label><input type="number" id="a_parents" value="0" min="0" max="4" step="1"></div>
         <div class="field"><label for="a_child1">บุตร คนที่ 1 หรือเกิดก่อนปี 2561</label><input type="number" id="a_child1" value="0" min="0" step="1"></div>
         <div class="field"><label for="a_child2">บุตรคนที่ 2 ขึ้นไป ที่เกิดปี 2561+<small>คนละ 60,000 บาท</small></label><input type="number" id="a_child2" value="0" min="0" step="1"></div>
         <div class="field"><label for="a_disabled">อุปการะคนพิการ/ทุพพลภาพ (คน)<small>คนละ 60,000 บาท</small></label><input type="number" id="a_disabled" value="0" min="0" step="1"></div>
@@ -346,14 +347,14 @@ footer{text-align:center;padding:30px 0 0;color:var(--text-muted);font-size:12px
       <div class="card">
         <h2><span class="num">4</span> ประกันและดอกเบี้ยที่อยู่อาศัย</h2>
         <p class="sub">กรอกเบี้ยที่จ่ายจริง ระบบจะตัดเพดานให้</p>
-        <div class="field"><label for="p_sso">ประกันสังคม (จ่ายจริงทั้งปี)<small>ลดหย่อนได้สูงสุด 9,000 บาท</small></label><input type="number" id="p_sso" value="10500" min="0" step="100"></div>
+        <div class="field"><label for="p_sso">ประกันสังคม (จ่ายจริงทั้งปี)<small>ลดหย่อนได้สูงสุด 9,000 บาท</small></label><input type="number" id="p_sso" value="0" min="0" step="100"></div>
         <div class="capnote" id="cap_sso"></div>
-        <div class="field"><label for="p_health">เบี้ยประกันสุขภาพตนเอง<small>สูงสุด 25,000 บาท</small></label><input type="number" id="p_health" value="35791" min="0" step="1000"></div>
+        <div class="field"><label for="p_health">เบี้ยประกันสุขภาพตนเอง<small>สูงสุด 25,000 บาท</small></label><input type="number" id="p_health" value="0" min="0" step="1000"></div>
         <div class="capnote" id="cap_health"></div>
-        <div class="field"><label for="p_life">เบี้ยประกันชีวิต<small>ชีวิต + สุขภาพ รวมกันไม่เกิน 100,000 บาท</small></label><input type="number" id="p_life" value="24340" min="0" step="1000"></div>
+        <div class="field"><label for="p_life">เบี้ยประกันชีวิต<small>ชีวิต + สุขภาพ รวมกันไม่เกิน 100,000 บาท</small></label><input type="number" id="p_life" value="0" min="0" step="1000"></div>
         <div class="capnote" id="cap_life"></div>
         <div class="field"><label for="p_phealth">ประกันสุขภาพบิดามารดา<small>สูงสุด 15,000 บาท</small></label><input type="number" id="p_phealth" value="0" min="0" step="1000"></div>
-        <div class="field"><label for="p_mortgage">ดอกเบี้ยเงินกู้ที่อยู่อาศัย<small>สูงสุด 100,000 บาท</small></label><input type="number" id="p_mortgage" value="100000" min="0" step="1000"></div>
+        <div class="field"><label for="p_mortgage">ดอกเบี้ยเงินกู้ที่อยู่อาศัย<small>สูงสุด 100,000 บาท</small></label><input type="number" id="p_mortgage" value="0" min="0" step="1000"></div>
         <div class="capnote" id="cap_mortgage"></div>
       </div>
 
@@ -398,7 +399,7 @@ footer{text-align:center;padding:30px 0 0;color:var(--text-muted);font-size:12px
       <div class="card">
         <h2><span class="num">7</span> ข้อมูลสำหรับคำแนะนำ</h2>
         <p class="sub">ใช้ประเมินว่า &ldquo;ควรซื้อเท่าไร&rdquo; โดยไม่เกินกำลังของคุณ</p>
-        <div class="field"><label for="r_spare">เงินเย็นที่ลงทุนได้ต่อปี<small>เงินที่ไม่ต้องใช้อีกอย่างน้อย 5 ปี</small></label><input type="number" id="r_spare" value="50000" min="0" step="5000"></div>
+        <div class="field"><label for="r_spare">เงินเย็นที่ลงทุนได้ต่อปี<small>เงินที่ไม่ต้องใช้อีกอย่างน้อย 5 ปี</small></label><input type="number" id="r_spare" value="0" min="0" step="5000"></div>
         <div class="field"><label for="r_safe">ผลตอบแทนทางเลือกที่ปลอดภัย (%/ปี)<small>เช่น ดอกเบี้ยเงินฝากประจำ</small></label><input type="number" id="r_safe" value="2.5" min="0" step="0.25"></div>
         <div class="btnrow">
           <button class="btn ghost" id="exportBtn">บันทึกข้อมูล (.json)</button>

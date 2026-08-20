@@ -19,8 +19,28 @@
 ### เผยแพร่บน GitHub Pages
 
 1. push โฟลเดอร์นี้ขึ้น repository
-2. ไปที่ **Settings → Pages** เลือก Source เป็น branch `main` โฟลเดอร์ `/ (root)`
-3. เปิด URL ที่ได้
+2. repository ต้องเป็น **Public** — บัญชี GitHub Free เผยแพร่ Pages จาก repo ที่เป็น Private ไม่ได้
+   (ถ้าตอนนี้เป็น Private ให้ไปที่ **Settings → General → Danger Zone → Change repository visibility → Make public**)
+3. ไปที่ **Settings → Pages** → Source เลือก **Deploy from a branch** → branch `main` → โฟลเดอร์ `/ (root)` → **Save**
+4. รอประมาณ 1–2 นาที แล้วเปิด `https://<username>.github.io/<repo-name>/`
+
+> **หมายเหตุ** ต่อให้ repo เป็น Private เว็บที่ Pages เผยแพร่ออกไปก็ยังเป็นสาธารณะอยู่ดี
+> การตั้ง repo เป็น Private ปกป้องแค่ *ซอร์สโค้ด* ไม่ได้ใส่รหัสผ่านให้หน้าเว็บ
+
+### ถ้าเปิด URL แล้วขึ้น 404
+
+- repo ยังเป็น **Private** และเบราว์เซอร์ยังไม่ได้ Sign in → GitHub จะตอบ 404 เสมอ ลอง sign in หรือเปลี่ยนเป็น Public
+- ยังไม่ได้กด **Push origin** ใน GitHub Desktop → commit อยู่แต่ในเครื่อง ยังไม่ขึ้น GitHub
+- เพิ่งเปิด Pages → รอสัก 1–2 นาทีให้ deploy เสร็จก่อน
+- อย่าลืมว่า URL ของ **repo** (`github.com/user/repo`) กับ URL ของ **เว็บ** (`user.github.io/repo/`) เป็นคนละอันกัน
+
+## ข้อมูลส่วนตัว
+
+ค่าเริ่มต้นในหน้าเว็บเป็น **ตัวเลขตัวอย่าง** ไม่ใช่ข้อมูลจริงของใคร ปลอดภัยที่จะเผยแพร่เป็น Public
+
+ถ้าต้องการใช้ตัวเลขของตัวเองซ้ำ ๆ ให้กดปุ่ม **บันทึกข้อมูล (.json)** ท้ายหน้า เก็บไฟล์ไว้ในเครื่อง แล้วกด **โหลดข้อมูล** เมื่อกลับมาใช้ใหม่
+
+ไฟล์ `.gitignore` ตั้งค่าไว้ให้กันไฟล์ `my-data.json` และ `tax-plan-*.json` ไม่ให้ถูก commit ขึ้น repo โดยไม่ตั้งใจอยู่แล้ว **อย่าลบบรรทัดเหล่านั้นออก** และอย่า commit ไฟล์ข้อมูลส่วนตัวขึ้น repo สาธารณะ
 
 ## โครงสร้างไฟล์
 
@@ -28,6 +48,8 @@
 index.html                  แอปทั้งหมด (HTML + CSS + JS ในไฟล์เดียว)
 vendor/pdf.min.js           pdf.js สำหรับอ่านไฟล์ PDF
 vendor/pdf.worker.min.js
+.gitignore                  กันไฟล์ข้อมูลส่วนตัวไม่ให้ถูก commit
+.nojekyll                   บอก GitHub Pages ให้ส่งไฟล์ตามที่เป็น
 ```
 
 `index.html` จะโหลด pdf.js จากโฟลเดอร์ `vendor/` ก่อน ถ้าไม่พบจะไปโหลดจาก CDN แทน
